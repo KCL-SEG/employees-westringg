@@ -14,7 +14,7 @@ class Employee:
 
     def get_pay(self):
         return self.getRegularPay()
-
+    
     def __str__(self):
         return self.name
 
@@ -23,16 +23,15 @@ class Employee:
     
     def getContractComm(self, contractCommissionAmount, contractNumber):
         return contractCommissionAmount*contractNumber
-
-    def str(self):
-        pass
     
+
+
 
 class salaryEmployee(Employee):
     def __init__(self, name, perPayAmount):
         super().__init__(name, perPayAmount)
-    def str(self):
-        return (self.name + ' works on a monthly salary of ' + str(self.perPayAmount) + '. Their total pay is ' + str(self.get_pay()) + '.')
+    def __str__(self):
+        return f"{self.name} works on a monthly salary of {self.perPayAmount}.  Their total pay is {self.get_pay()}."
 
 
 class salaryBonusEmployee(salaryEmployee):
@@ -43,8 +42,9 @@ class salaryBonusEmployee(salaryEmployee):
     def get_pay(self):
         return super().getRegularPay() + super().getBonusComm(self.bonusAmount)
         
-    def str(self):
-        return (self.name + ' works on a monthly salary of ' + str(self.perPayAmount) + '. Their total pay is ' + str(self.get_pay()) + '.')
+    def __str__(self):
+        return f"{self.name} works on a monthly salary of {str(self.perPayAmount)} and receives a bonus commission of {self.bonusAmount}.  Their total pay is {self.get_pay()}."
+
 
 class salaryContractEmployee(salaryEmployee):
     def __init__(self, name, perPayAmount, contractCommissionAmount, contractNumber):
@@ -55,9 +55,10 @@ class salaryContractEmployee(salaryEmployee):
     def get_pay(self):
         return super().getRegularPay()+super().getContractComm(self.contractCommissionAmount, self.contractNumber)
 
-    def str(self):
-        return (self.name + ' works on a monthly salary of '+ str(self.perPayAmount) + ' and receives a commission for '
-        + str(self.contractNumber) + ' contract(s) at '+ str(self.contractCommissionAmount) + '/contract. Their total pay is ' + str(self.get_pay()) + '.')
+    def __str__(self):
+        return f"{self.name} works on a monthly salary of {self.perPayAmount} and receives a commission for {self.contractNumber} contract(s) at {self.contractCommissionAmount}/contract.  Their total pay is {self.get_pay()}."
+
+
 
 
 class hourlyEmployee(Employee):
@@ -71,9 +72,8 @@ class hourlyEmployee(Employee):
     def get_pay(self):
         return super().getRegularPay()*self.hour
 
-    def str(self):
-        return (self.name + ' works on a contract of ' + str(self.hour) + ' at ' + str(self.perPayAmount) + 
-        '/hour. Their total pay is ' + str(self.get_pay()) + '.')
+    def __str__(self):
+        return f"{self.name} works on a contract of {self.hour} hours at {self.perPayAmount}/hour.  Their total pay is {self.get_pay()}."
 
 
 class hourlyBonusEmployee(hourlyEmployee):
@@ -84,9 +84,8 @@ class hourlyBonusEmployee(hourlyEmployee):
     def get_pay(self):
         return super().getRegularPay()+self.bonusAmount
 
-    def str(self):
-        return (self.name + ' works on a contract of ' + str(self.hour) + ' at ' + str(self.perPayAmount) 
-        + '/hour and receives a bonus commission of ' + str(self.bonusAmount) + '. Their total pay is ' + str(self.get_pay()) + '.')
+    def __str__(self):
+        return f"{self.name} works on a contract of {self.hour} hours at {self.perPayAmount}/hour and receives a bonus commission of {self.bonusAmount}.  Their total pay is {self.get_pay()}."
 
 
 class hourlyContractEmployee(hourlyEmployee):
@@ -98,41 +97,38 @@ class hourlyContractEmployee(hourlyEmployee):
     def get_pay(self):
         return super().getRegularPay()+super().getContractComm(self.contractCommissionAmount, self.contractNumber)
 
-    def str(self):
-        return (self.name + ' works on a contract of ' + str(self.hour) + ' at ' + str(self.perPayAmount)
-        + '/hour and receives a commission for ' + str(self.contractNumber) + ' contract(s) at ' + str(self.contractCommissionAmount)
-        + '/contract. Their total pay is ' + str(self.get_pay()) + '.')
+    def __str__(self):
+        return f"{self.name} works on a contract of {self.hour} hours at {self.perPayAmount}/hour and receives a commission for {self.contractNumber} contract(s) at {self.contractCommissionAmount}/contract.  Their total pay is {self.get_pay()}."
 
 
 
 # Billie works on a monthly salary of 4000.  Their total pay is 4000.
 billie = salaryEmployee('Billie', 4000)
-print(billie.get_pay())
-print(billie.str())
+#print(billie.get_pay())
+print(str(billie))
 
 # Charlie works on a contract of 100 hours at 25/hour.  Their total pay is 2500.
 charlie = hourlyEmployee('Charlie', 25, 100)
-print(charlie.get_pay())
-print(charlie.str())
+#print(charlie.get_pay())
+print(str(charlie))
 
 # Renee works on a monthly salary of 3000 and receives a commission for 4 contract(s) at 200/contract.  Their total pay is 3800.
 renee = salaryContractEmployee('Renee', 3000, 200, 4)
-print(renee.get_pay())
-print(renee.str())
+#print(renee.get_pay())
+print(str(renee))
 
 # Jan works on a contract of 150 hours at 25/hour and receives a commission for 3 contract(s) at 220/contract.  Their total pay is 4410.
 jan = hourlyContractEmployee('Jan', 25, 150, 220, 3)
-print(jan.get_pay())
-print(jan.str())
+#print(jan.get_pay())
+print(str(jan))
 
 # Robbie works on a monthly salary of 2000 and receives a bonus commission of 1500.  Their total pay is 3500.
 robbie = salaryBonusEmployee('Robbie', 2000, 1500)
-print(robbie.get_pay())
-print(robbie.str())
+#print(robbie.get_pay())
+print(str(robbie))
 
 
 # Ariel works on a contract of 120 hours at 30/hour and receives a bonus commission of 600.  Their total pay is 4200.
 ariel = hourlyBonusEmployee('Ariel', 30, 120, 600)
-print(ariel.get_pay())
-print(ariel.str())
-
+#print(ariel.get_pay())
+print(str(ariel))
